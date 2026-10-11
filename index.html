@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prism — IPA tweak injector</title>
+  <meta name="description" content="Inject tweak dylibs into a Spotify IPA, entirely in your browser. No account, no paywall.">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <div class="glow"></div>
+  <header>
+    <div class="brand">
+      <span class="mark"></span>
+      <span class="word">Prism</span>
+      <span class="badge">Plus — free for everyone</span>
+    </div>
+    <p class="tag">Weak-link a tweak into your Spotify IPA, right here in the browser. Nothing uploads. No account, no wall.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2><span class="num">1</span> Drop your IPA</h2>
+      <div id="drop" class="drop">
+        <input id="ipa" type="file" accept=".ipa" hidden>
+        <div class="dz-mark"></div>
+        <div class="hint">Click or drop a decrypted Spotify <code>.ipa</code></div>
+      </div>
+      <p class="fine">It must be a <strong>decrypted</strong>, 64-bit IPA. Nothing is sent anywhere — the file is read in memory.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="num">2</span> Pick tweaks</h2>
+      <div id="tweaks" class="tweaks"></div>
+      <label class="custom-row">
+        <span>…or add your own dylib</span>
+        <input id="custom" type="file" accept=".dylib">
+      </label>
+    </section>
+
+    <section class="card">
+      <h2><span class="num">3</span> Inject</h2>
+      <button id="go" class="go">Inject &amp; repack</button>
+      <a id="download" class="dl" style="display:none">Download patched IPA</a>
+      <div class="progress"><div id="bar"></div></div>
+      <div id="log" class="log"></div>
+      <p class="fine">The result is <strong>unsigned</strong>. Sign it with your own certificate (Sideloadly, Feather, AltStore) before installing.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Runs fully client-side. Tweak-injection logic after spoti.pw's <code>insert-dylib.py</code>. Bring your own IPA and signing certificate.</p>
+  </footer>
+</body>
+</html>
