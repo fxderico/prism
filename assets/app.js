@@ -164,9 +164,9 @@ async function run() {
 
 /* ---- bundled tweaks + wiring ---- */
 const BUNDLED = [
-  { label: "spoti.pw — Liquid Glass", url: "tweaks/spotifyglass.dylib", dylibName: "spotifyglass.dylib",
-    note: "Also drop in the AppGroups dylib below; the full kit (plugins, Info.plist) needs the spoti.pw build pipeline." },
-  { label: "spoti.pw — App Groups (dependency)", url: "tweaks/SpotifyGlassAppGroups.dylib", dylibName: "SpotifyGlassAppGroups.dylib" },
+  { label: "Our build — spoti.pw + Premium (Eevee)", url: "tweaks/spotifyglass.dylib", dylibName: "spotifyglass.dylib",
+    note: "Liquid Glass + Spotify Premium unlock, default on. Also check App Groups below (dependency).", default: true },
+  { label: "spoti.pw — App Groups (dependency)", url: "tweaks/SpotifyGlassAppGroups.dylib", dylibName: "SpotifyGlassAppGroups.dylib", default: true },
   { label: "AutoFlex", url: "tweaks/autoflex.dylib", dylibName: "autoflex.dylib" },
 ];
 
@@ -176,12 +176,15 @@ function buildTweakList() {
     const row = document.createElement("label");
     row.className = "tweak";
     row.innerHTML =
-      `<input type="checkbox"><span class="t-name">${t.label}</span>` +
+      `<input type="checkbox"${t.default ? " checked" : ""}><span class="t-name">${t.label}</span>` +
       (t.note ? `<span class="t-note">${t.note}</span>` : "");
-    row.querySelector("input").addEventListener("change", (e) => {
-      if (e.target.checked) selectedTweaks.set(t.label, { url: t.url, dylibName: t.dylibName });
+    const box = row.querySelector("input");
+    const sync = () => {
+      if (box.checked) selectedTweaks.set(t.label, { url: t.url, dylibName: t.dylibName });
       else selectedTweaks.delete(t.label);
-    });
+    };
+    box.addEventListener("change", sync);
+    if (t.default) sync();   // auto-inject our build out of the box
     list.appendChild(row);
   });
 }
