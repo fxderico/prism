@@ -168,6 +168,8 @@ const BUNDLED = [
     note: "Liquid Glass + Spotify Premium unlock, default on. Also check App Groups below (dependency).", default: true },
   { label: "spoti.pw — App Groups (dependency)", url: "tweaks/SpotifyGlassAppGroups.dylib", dylibName: "SpotifyGlassAppGroups.dylib", default: true },
   { label: "AutoFlex", url: "tweaks/autoflex.dylib", dylibName: "autoflex.dylib" },
+  { label: "Chroma Plus Unlock", url: "tweaks/chromaunlock.dylib", dylibName: "chromaunlock.dylib",
+    note: "Inject into the OFFICIAL Chroma IPA (not stock Spotify): removes the Plus wall — Sing, lyrics, audio effects, gestures, visualizer all open. Use this one alone." },
 ];
 
 function buildTweakList() {
